@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Set the app title
-st.title("My First Streamlit App")
+st.title("Jorge - My Streamlit App")
 
 # Add a text input field
 name = st.text_input("Enter your name")
