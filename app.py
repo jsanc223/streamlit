@@ -1,25 +1,32 @@
 import streamlit as st
 from transformers import pipeline
 
-# Initialize the translation pipeline
+# Initialize the translation and summarization pipelines
 translator = pipeline("translation_en_to_es", model="Helsinki-NLP/opus-mt-en-es")
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
 # Set the app title
-st.title("Jorge - My Streamlit App")
+st.title("Jorge -  NLP App")
 
-# Add a text input field
-#name = st.text_input("Enter your name")
+# Add a radio button to select the task
+task = st.radio("Choose a task", ("Translation (English to Spanish)", "Text Summarization"))
 
-# Display a greeting
-#st.write(f"Hello, {name}!")
+# Add a text area input field for the text to process
+text_to_process = st.text_area("Enter some text", value="")
 
-# Add a text input field for the text to translate
-text_to_translate = st.text_input("Enter some text to translate to Spanish")
+# Add a submit button to run the selected task
+if st.button("Apply"):
 
-# Only translate if there is text to translate
-if text_to_translate:
-    # Use the translator to translate the text
-    translation = translator(text_to_translate)[0]['translation_text']
+    # Only process if there is text
+    if text_to_process:
 
-    # Display the translated text
-    st.write(translation)
+        if task == "Translation (English to Spanish)":
+            # Use the translator to translate the text
+            processed_text = translator(text_to_process)[0]['translation_text']
+
+        elif task == "Text Summarization":
+            # Use the summarizer to summarize the text
+            processed_text = summarizer(text_to_process, do_sample=False)[0]['summary_text']
+
+        # Display the processed text
+        st.write(f'Processed text: {processed_text}')
