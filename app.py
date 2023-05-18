@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Set the app title
-st.title("Jorge - My Streamlit App")
+st.title("Jorge new change- My Streamlit App")
 
 # Add a text input field
 name = st.text_input("Enter your name")
