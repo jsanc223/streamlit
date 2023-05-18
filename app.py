@@ -6,7 +6,7 @@ translator = pipeline("translation_en_to_es", model="Helsinki-NLP/opus-mt-en-es"
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
 # Set the app title
-st.title("Jorge -  NLP App")
+st.title("Jorge - my NLP App")
 
 # Add a radio button to select the task
 task = st.radio("Choose a task", ("Translation (English to Spanish)", "Text Summarization"))
